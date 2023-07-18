@@ -13,63 +13,41 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asm.R;
-import com.example.asm.databinding.FragmentCalendarBinding;
+
 import com.example.asm.view.main.adapter.CourceAdapter;
 import com.example.asm.view.main.adapter.DateAdapter;
+import com.example.asm.view.main.adapter.ListCourceAdapter;
 import com.example.asm.view.main.model.Cource;
-import com.example.asm.view.main.model.DateModel;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class CalendarFragment extends Fragment {
+public class ListCourceFragment extends Fragment {
+    RecyclerView recyclerViewCource;
 
-    ArrayList<DateModel> listDate;
     ArrayList<Cource> listCource;
-    RecyclerView recyclerViewDate, recyclerViewCource;
 
-
-    private FragmentCalendarBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //binding = FragmentCalendarBinding.inflate(inflater,container, false);
-        //View view = binding.getRoot();
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-        recyclerViewDate = view.findViewById(R.id.recyclerViewDate);
+        View view = inflater.inflate(R.layout.fragment_list_cource, container, false);
         recyclerViewCource = view.findViewById(R.id.recyclerViewCource);
         return view;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         initData();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL, false);
-        recyclerViewDate.setLayoutManager(layoutManager);
-        DateAdapter adapter = new DateAdapter(listDate, getContext());
-        recyclerViewDate.setAdapter(adapter);
-
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
-        recyclerViewCource.setLayoutManager(layoutManager2);
-        CourceAdapter adapter2 = new CourceAdapter(listCource, getContext());
-        recyclerViewCource.setAdapter(adapter2);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerViewCource.setLayoutManager(layoutManager);
+        ListCourceAdapter adapter = new ListCourceAdapter(listCource, getContext());
+        recyclerViewCource.setAdapter(adapter);
 
     }
 
     private void initData(){
-        // danh sach Date
-        listDate = new ArrayList<>();
-        listDate.add(new DateModel(1, 21, "S"));
-        listDate.add(new DateModel(2, 22, "M"));
-        listDate.add(new DateModel(3, 23, "T"));
-        listDate.add(new DateModel(4, 24, "W"));
-        listDate.add(new DateModel(5, 25, "T"));
-        listDate.add(new DateModel(6, 26, "F"));
-        listDate.add(new DateModel(7, 27, "S"));
 
         //danh sach mon hoc
         listCource = new ArrayList<>();

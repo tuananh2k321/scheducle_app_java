@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.example.asm.R;
 import com.example.asm.databinding.ActivityMainBinding;
 import com.example.asm.view.main.calendar.CalendarFragment;
+import com.example.asm.view.main.calendar.ListCourceFragment;
 import com.example.asm.view.main.home.HomeFragment;
 import com.example.asm.view.main.notification.NotificationFragment;
 import com.example.asm.view.main.service.ServiceFragment;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.home) {
                 replayFragment(new HomeFragment());
             } else if (itemId == R.id.calendar) {
-                replayFragment(new CalendarFragment());
+                replayFragment(new ListCourceFragment());
             } else if (itemId == R.id.notification) {
                 replayFragment(new NotificationFragment());
             } else if (itemId == R.id.service) {
