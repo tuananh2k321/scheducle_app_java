@@ -1,6 +1,7 @@
 package com.example.asm.view.main.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          holder.tv_category.setText(categoryList.get(position).getName());
          holder.img_category.setImageResource(categoryList.get(position).getImg());
          holder.cv_background.setCardBackgroundColor(Color.parseColor(categoryList.get(position).getColor()));
+
+         holder.cv_background.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Intent intent = new Intent(context, NewsListActivity.class);
+                 context.startActivity(intent);
+             }
+         });
     }
 
     @Override
