@@ -34,11 +34,19 @@
                 android:textStyle="bold"/>
         </FrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_news"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            tools:listitem="@layout/item_news"/>
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                tools:listitem="@layout/item_news"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 </layout>

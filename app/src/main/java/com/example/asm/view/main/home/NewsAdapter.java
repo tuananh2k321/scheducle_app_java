@@ -39,7 +39,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         holder.tvTitle.setText(newsList.get(position).getTitle());
         holder.tvDetail.setText(newsList.get(position).getDetail());
-        holder.imgNews.setImageResource(newsList.get(position).getImage());
+        holder.imgNews.setImageResource(newsList.get(position).getImg());
 
         holder.cvNews.setOnClickListener(new View.OnClickListener() {
             @Override

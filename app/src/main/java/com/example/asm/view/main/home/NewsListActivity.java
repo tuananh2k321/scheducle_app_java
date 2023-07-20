@@ -46,6 +46,7 @@ public class NewsListActivity extends AppCompatActivity {
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
                 R.drawable.img_slider_1,
+                true,
                 1
         ));
         newsList.add(new News(2,
@@ -53,6 +54,7 @@ public class NewsListActivity extends AppCompatActivity {
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
                 R.drawable.img_avatar,
+                false,
                 1
         ));
         newsList.add(new News(3,
@@ -60,6 +62,7 @@ public class NewsListActivity extends AppCompatActivity {
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
                 R.drawable.img_slider_2,
+                true,
                 1
         ));
         newsList.add(new News(4,
@@ -67,6 +70,7 @@ public class NewsListActivity extends AppCompatActivity {
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
                 R.drawable.img_slider_1,
+                true,
                 1
         ));
         newsList.add(new News(5,
@@ -74,6 +78,7 @@ public class NewsListActivity extends AppCompatActivity {
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
                 R.drawable.img_slider_1,
+                false,
                 1
         ));
         newsList.add(new News(6,
@@ -81,6 +86,7 @@ public class NewsListActivity extends AppCompatActivity {
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
                 R.drawable.img_slider_1,
+                false,
                 1
         ));
     }
