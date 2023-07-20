@@ -17,7 +17,7 @@ import com.example.asm.R;
 
 public class ServiceFragment extends Fragment {
 
-    private LinearLayout dangki_dv;
+    private LinearLayout dangki_dv,linearLayout2,linearLayout3,linearLayout5;
 
 
 
@@ -32,10 +32,31 @@ public class ServiceFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dangki_dv =view.findViewById(R.id.dangki_dv);
+        linearLayout2 =view.findViewById(R.id.linearLayout2);
+        linearLayout3 =view.findViewById(R.id.linearLayout3);
+        linearLayout5 =view.findViewById(R.id.linearLayout5);
         dangki_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ServiceCompleteAcctivity.class));
+            }
+        });
+        linearLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), FormBangDiemActivity.class));
+            }
+        });
+        linearLayout3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), FromCardStudentActivity.class));
+            }
+        });
+        linearLayout5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), FormStudentActivity.class));
             }
         });
     }

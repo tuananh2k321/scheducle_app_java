@@ -21,8 +21,6 @@ public class ServiceCompleteAcctivity extends AppCompatActivity {
     private List<ServiceComplete> itemList;
     private ServiceCompleteAdapter adapter;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,5 +44,13 @@ public class ServiceCompleteAcctivity extends AppCompatActivity {
 
         adapter = new ServiceCompleteAdapter(itemList);
         recyclerView.setAdapter(adapter);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
