@@ -69,7 +69,7 @@
         <ImageView
             android:layout_width="24sp"
             android:layout_height="24sp"
-            android:src="@drawable/icon_menu_right" />
+            android:src="@drawable/img_menu_right" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

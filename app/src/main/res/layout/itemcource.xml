@@ -81,7 +81,7 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/ico_location"/>
+                        android:src="@drawable/img_location"/>
                     <TextView
                         android:id="@+id/txtPhong"
                         android:layout_width="match_parent"
@@ -114,10 +114,7 @@
                 </LinearLayout>
                 
             </LinearLayout>
-            <ImageView
-                android:layout_width="24sp"
-                android:layout_height="24sp"
-                android:src="@drawable/icon_menu"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

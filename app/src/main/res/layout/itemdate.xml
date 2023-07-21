@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/primaryColor"
+        android:background="@color/gray_light"
         android:gravity="center">
         <TextView
             android:id="@+id/txtThu"
@@ -20,7 +20,7 @@
             android:text="W"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             />
         <TextView
             android:id="@+id/txtNgay"
@@ -29,8 +29,9 @@
             android:text="24"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             />
+        
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -43,7 +43,7 @@
                     android:layout_width="196sp"
                     android:layout_height="40sp"
                     android:layout_gravity="center"
-                    android:drawableEnd="@drawable/icon_arrow_down_right"
+                    android:drawableEnd="@drawable/img_arrow_down_right"
                     android:gravity="center"
                     android:text="7 ngày tới"
                     android:textAllCaps="false"
