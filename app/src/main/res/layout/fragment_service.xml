@@ -1,14 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.service.ServiceFragment">
+    tools:context=".view.main.service.ServiceFragment"
+    android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="service" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:background="@drawable/dv_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView52"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_dv1" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:text="Đăng kí cấp bảng điểm"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/imageView74"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/dv_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:id="@+id/imageView51"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_dv2" />
+
+            <TextView
+                android:id="@+id/text2View4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+
+                android:layout_marginLeft="10dp"
+                android:text="Đăng kí cấp thẻ sinh viên"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/image3View7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/dv_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <ImageView
+                android:id="@+id/imgeView5"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_dv3" />
+
+            <TextView
+                android:id="@+id/textiew4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+
+                android:layout_marginLeft="10dp"
+                android:text="Đăng kí khôi phục điểm danh"
+                android:textColor="@color/black"
+                android:textSize="22sp"/>
+
+            <ImageView
+                android:id="@+id/imageVew7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/dv_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+            <ImageView
+                android:id="@+id/imaeVew5"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_dv4" />
+
+            <TextView
+                android:id="@+id/textViw4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Đăng kí xác nhận sinh viên"
+                android:textColor="@color/black"
+
+                android:layout_marginLeft="10dp"
+                android:textSize="22sp"/>
+
+            <ImageView
+                android:id="@+id/imaeew7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/dv_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <ImageView
+                android:id="@+id/imageVie"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_dv5" />
+
+            <TextView
+                android:id="@+id/textVi4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Đăng kí học lại"
+                android:textColor="@color/black"
+
+                android:layout_marginLeft="10dp"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/imageew7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dangki_dv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/dv_border"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+            <ImageView
+                android:id="@+id/imageVw5"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_dv6" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:text="Dịch vụ đã đăng kí"
+                android:textColor="@color/black"
+                android:textSize="22sp"/>
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
