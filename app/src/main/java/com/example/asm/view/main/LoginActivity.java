@@ -99,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
-
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
                 firebaseAuth(account.getIdToken());
