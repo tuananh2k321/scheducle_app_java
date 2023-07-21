@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -124,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                             users.setUserId(user.getUid());
                             users.setName(user.getDisplayName());
                             users.setProfile(user.getPhotoUrl().toString());
+                            Log.d("users", "abc>>>>>>>>>: "+ users.toString());
 
                             database.getReference()
                                     .child("Users")

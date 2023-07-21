@@ -9,6 +9,15 @@ public class Users {
         this.profile = profile;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", profile='" + profile + '\'' +
+                '}';
+    }
+
     public Users() {
     }
 
