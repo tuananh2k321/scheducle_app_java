@@ -25,11 +25,11 @@
             android:name=".view.main.home.NewsListActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.MainActivity"
+            android:name=".view.main.SplashActivity"
             android:exported="false">
 
         </activity>
-        <activity android:name=".view.main.SplashActivity"
+        <activity android:name=".view.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
