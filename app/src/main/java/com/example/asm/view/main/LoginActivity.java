@@ -4,14 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asm.R;
@@ -32,10 +34,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Spinner spinner;
+    TextView tvchoose;
     Button btnLogin;
-    String dropSpinner[] = {"FPT Polytechnic HO", "FPT Polytechnic Hà Nội", "FPT Polytechnic Hồ Chí Minh", "FPT Polytechnic Đà Nẵng",
-            "FPT Polytechnic Cần Thơ", "FPT Polytechnic Tây Nguyên", "FPT Polytechnic Hải Phòng", };
+
+    AlertDialog.Builder builder;
 
     //gg auth
     FirebaseAuth auth;
@@ -50,14 +52,26 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        spinner = findViewById(R.id.spinner);
+        tvchoose = findViewById(R.id.tv_choose);
         btnLogin = findViewById(R.id.btn);
 
-        //spinner item
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.custom_spinner, dropSpinner);
-        adapter.setDropDownViewResource(R.layout.custom_spinner);
-        spinner.setAdapter(adapter);
+        builder = new AlertDialog.Builder(this);
+
+        //tv school
+        tvchoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder.setItems(R.array.item_array_school, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String[] items = getResources().getStringArray(R.array.item_array_school);
+                        String selectedItem = items[which];
+                        tvchoose.setText(selectedItem);
+                    }
+                });
+                builder.show();
+            }
+        });
 
         FirebaseApp.initializeApp(this);
         //gg

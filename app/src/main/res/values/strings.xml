@@ -15,4 +15,14 @@
         <!-- Thêm các item khác vào đây -->
     </string-array>
 
+    <string-array name="item_array_school">
+        <item>FPT Polytechnic HO<br/></item>
+        <item>FPT Polytechnic Hà Nội</item>
+        <item>FPT Polytechnic Hồ Chí Minh</item>
+        <item>FPT Polytechnic Đà Nẵng</item>
+        <item>FPT Polytechnic Cần Thơ</item>
+        <item>FPT Polytechnic Tây Nguyên</item>
+        <item>FPT Polytechnic Hải Phòng</item>
+    </string-array>
+
 </resources>
