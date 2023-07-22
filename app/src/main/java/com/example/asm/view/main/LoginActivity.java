@@ -79,8 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setTitle("Tạo account!!");
-        progressDialog.setMessage("Tạo thành công!!");
+        progressDialog.setTitle("Đăng nhập");
+        progressDialog.setMessage("Thành công!!");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
