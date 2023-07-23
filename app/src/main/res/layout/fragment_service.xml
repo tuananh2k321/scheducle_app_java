@@ -47,7 +47,7 @@
                 android:id="@+id/imageView52"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_dv1" />
+                android:src="@drawable/ic_dv1" />
 
             <TextView
                 android:id="@+id/textView43"
@@ -89,7 +89,8 @@
                 android:id="@+id/imageView51"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_dv2" />
+                android:backgroundTint="@color/primaryColor"
+                android:src="@drawable/ic_dv2" />
 
             <TextView
                 android:id="@+id/text2View4"
@@ -132,7 +133,7 @@
                 android:id="@+id/imgeView5"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_dv3" />
+                android:src="@drawable/ic_dv3" />
 
             <TextView
                 android:id="@+id/textiew4"
@@ -175,7 +176,7 @@
                 android:id="@+id/imaeVew5"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_dv4" />
+                android:src="@drawable/ic_dv4" />
 
             <TextView
                 android:id="@+id/textViw4"
@@ -217,7 +218,7 @@
                 android:id="@+id/imageVie"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_dv5" />
+                android:src="@drawable/ic_dv5" />
 
             <TextView
                 android:id="@+id/textVi4"
@@ -261,7 +262,7 @@
                 android:id="@+id/imageVw5"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_dv6" />
+                android:src="@drawable/ic_dv6" />
 
             <TextView
                 android:id="@+id/textView4"
