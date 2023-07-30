@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,12 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.StackView;
 import android.widget.Toast;
 
 import com.example.asm.R;
 import com.example.asm.view.main.adapter.CourceAdapter;
 import com.example.asm.view.main.adapter.DateAdapter;
+import com.example.asm.view.main.adapter.StackAdapter;
 import com.example.asm.view.main.model.Cource;
 import com.example.asm.view.main.model.DateModel;
 import com.example.asm.view.main.recycleview.IRecycleview;
@@ -33,6 +38,7 @@ public class LichThiFragment extends Fragment implements IRecycleview {
     ArrayList<DateModel> listDate;
     ArrayList<Cource> listCource;
     RecyclerView recyclerViewDate, recyclerViewCource;
+    StackView stackView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +46,9 @@ public class LichThiFragment extends Fragment implements IRecycleview {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lich_thi, container, false);
         recyclerViewDate = view.findViewById(R.id.recyclerViewDate);
-        recyclerViewCource = view.findViewById(R.id.recyclerViewCource);
+        //recyclerViewCource = view.findViewById(R.id.recyclerViewCource);
+        stackView = view.findViewById(R.id.stackView);
+
         return view;
     }
     @Override
@@ -54,10 +62,20 @@ public class LichThiFragment extends Fragment implements IRecycleview {
         DateAdapter adapter = new DateAdapter(listDate, getContext());
         recyclerViewDate.setAdapter(adapter);
 
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
-        recyclerViewCource.setLayoutManager(layoutManager2);
-        CourceAdapter adapter2 = new CourceAdapter(listCource, getContext(), this);
-        recyclerViewCource.setAdapter(adapter2);
+//        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+//        stackView.setLayoutManager(layoutManager2);
+        //CourceAdapter adapter2 = new CourceAdapter(listCource, getContext(), this);
+        StackAdapter stackAdapter = new StackAdapter(getContext(),R.layout.itemcource_stack,listCource);
+        stackView.setAdapter(stackAdapter);
+
+        stackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int index = position;
+                Toast.makeText(getContext(), "Selected contact: "+ index, Toast.LENGTH_LONG).show();
+                getAllCource(Gravity.CENTER);
+            }
+        });
     }
 
     private void initData(){
@@ -124,7 +142,7 @@ public class LichThiFragment extends Fragment implements IRecycleview {
             dialog.setCancelable(false);
         }
 
-        Button btnOk = dialog.findViewById(R.id.btnOk);
+        AppCompatButton btnOk = dialog.findViewById(R.id.btnOk);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -133,7 +134,7 @@ public class LichHocFragment extends Fragment implements IRecycleview {
             dialog.setCancelable(false);
         }
 
-        Button btnOk = dialog.findViewById(R.id.btnOk);
+        AppCompatButton btnOk = dialog.findViewById(R.id.btnOk);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
