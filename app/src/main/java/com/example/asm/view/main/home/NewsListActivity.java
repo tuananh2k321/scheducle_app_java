@@ -1,52 +1,47 @@
-package com.example.asm.view.main.notification;
+package com.example.asm.view.main.home;
 
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.asm.R;
-import com.example.asm.databinding.FragmentNotificationBinding;
+import com.example.asm.databinding.ActivityNewsListBinding;
 import com.example.asm.model.News;
-import com.example.asm.view.main.home.NewsAdapter;
 
 import java.util.ArrayList;
 
-public class NotificationFragment extends Fragment {
-
-    private FragmentNotificationBinding binding;
-    private ArrayList<News> notifyList;
-    private NotificationAdapter notificationAdapter;
+public class NewsListActivity extends AppCompatActivity {
+    private ActivityNewsListBinding binding;
+    private ArrayList<News> newsList;
+    private NewsAdapter newsAdapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentNotificationBinding.inflate(getLayoutInflater());
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityNewsListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         dataInit();
+
+        // back
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // news list
         LinearLayoutManager layoutManager =
-                new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        binding.rcvNotification.setLayoutManager(layoutManager);
-        notificationAdapter = new NotificationAdapter(requireContext(), notifyList);
-        binding.rcvNotification.setAdapter(notificationAdapter);
-
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.rcvNews.setLayoutManager(layoutManager);
+        newsAdapter = new NewsAdapter(this, newsList);
+        binding.rcvNews.setAdapter(newsAdapter);
     }
 
     private void dataInit() {
-        notifyList = new ArrayList<>();
-        notifyList.add(new News(1,
+        newsList = new ArrayList<>();
+        newsList.add(new News(1,
                 "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
@@ -54,7 +49,7 @@ public class NotificationFragment extends Fragment {
                 true,
                 1
         ));
-        notifyList.add(new News(2,
+        newsList.add(new News(2,
                 "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
@@ -62,7 +57,7 @@ public class NotificationFragment extends Fragment {
                 false,
                 1
         ));
-        notifyList.add(new News(3,
+        newsList.add(new News(3,
                 "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
@@ -70,7 +65,7 @@ public class NotificationFragment extends Fragment {
                 true,
                 1
         ));
-        notifyList.add(new News(4,
+        newsList.add(new News(4,
                 "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
@@ -78,7 +73,7 @@ public class NotificationFragment extends Fragment {
                 true,
                 1
         ));
-        notifyList.add(new News(5,
+        newsList.add(new News(5,
                 "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
@@ -86,7 +81,7 @@ public class NotificationFragment extends Fragment {
                 false,
                 1
         ));
-        notifyList.add(new News(6,
+        newsList.add(new News(6,
                 "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
                 "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
                         "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",

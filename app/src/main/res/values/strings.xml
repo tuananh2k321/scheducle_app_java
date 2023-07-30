@@ -2,4 +2,17 @@
     <string name="app_name">ASM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id" />
+
+    <string-array name="item_array1">
+        <item>Xác nhận theo mẫu của nhà trường</item>
+        <item>Xác nhận theo mẫu của sinh viên</item>
+        <!-- Thêm các item khác vào đây -->
+    </string-array>
+    <string-array name="item_array2">
+        <item>Hoãn nghĩ vụ</item>
+        <item>Vay vốn</item>
+        <!-- Thêm các item khác vào đây -->
+    </string-array>
+
 </resources>
