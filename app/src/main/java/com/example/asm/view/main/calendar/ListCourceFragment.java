@@ -14,9 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.asm.R;
 
-import com.example.asm.view.main.adapter.CourceAdapter;
-import com.example.asm.view.main.adapter.DateAdapter;
-import com.example.asm.view.main.adapter.ListCourceAdapter;
+import com.example.asm.view.main.Adapter.ListCourceAdapter;
 import com.example.asm.view.main.model.Cource;
 
 import java.util.ArrayList;
