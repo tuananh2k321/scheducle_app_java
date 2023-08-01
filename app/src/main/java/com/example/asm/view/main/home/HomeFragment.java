@@ -7,25 +7,34 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.asm.R;
+import com.example.asm.api_res.CategoryRes;
 import com.example.asm.databinding.FragmentHomeBinding;
 import com.example.asm.model.Category;
 import com.example.asm.model.News;
+import com.example.asm.retrofit.IRetrofit;
+import com.example.asm.retrofit.RetrofitHelper;
 
-import java.sql.Array;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+
+    // retrofit
+    private IRetrofit iRetrofit;
 
     // slider
     private ArrayList<SlideModel> sliderList;
@@ -50,6 +59,9 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initData();
 
+        // retrofit
+        iRetrofit = RetrofitHelper.createService(IRetrofit.class);
+
         // slider
         binding.imageSlider.setImageList(sliderList);
 
@@ -57,8 +69,8 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.rcvCategory.setLayoutManager(layoutManager);
-        categoryAdapter = new CategoryAdapter(getContext(), categoryList);
-        binding.rcvCategory.setAdapter(categoryAdapter);
+        iRetrofit.getAllCategory().enqueue(categoryResCallback);
+
 
         // news
         LinearLayoutManager layoutManager1 =
@@ -68,6 +80,29 @@ public class HomeFragment extends Fragment {
         binding.rcvNews.setAdapter(newsAdapter);
     }
 
+    private Callback<CategoryRes> categoryResCallback = new Callback<CategoryRes>() {
+        @Override
+        public void onResponse(Call<CategoryRes> call, Response<CategoryRes> response) {
+            CategoryRes categoryRes = response.body();
+            if (categoryRes != null) {
+                if (categoryRes.getStatus()) {
+                    Log.e("categoryResCallback", "CategoryRes: " + "success");
+                    Log.e("categoryResCallback", "CategoryRes: " + categoryRes.toString());
+                    categoryList = categoryRes.getCategories();
+                    categoryAdapter = new CategoryAdapter(getContext(), categoryList);
+                    binding.rcvCategory.setAdapter(categoryAdapter);
+                } else {
+                    Log.e("categoryResCallback", "CategoryRes: " + "fail");
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(Call<CategoryRes> call, Throwable t) {
+            Log.e("categoryResCallback", "onFailure: " + t.getMessage());
+        }
+    };
+
     private void initData() {
         sliderList = new ArrayList<>();
         sliderList.add(new SlideModel(R.drawable.img_slider_1, ScaleTypes.CENTER_CROP));
@@ -75,9 +110,9 @@ public class HomeFragment extends Fragment {
         sliderList.add(new SlideModel(R.drawable.img_avatar, ScaleTypes.CENTER_CROP));
 
         categoryList = new ArrayList<>();
-        categoryList.add(new Category(1,"Học tập", R.drawable.icons8_learn_28, "#c5e1a5"));
-        categoryList.add(new Category(2, "Hoạt động", R.drawable.icons8_activity_28, "#e1bee7"));
-        categoryList.add(new Category(3, "Học phí", R.drawable.icons8_tuition_fee_28, "#b3e5fc"));
+//        categoryList.add(new Category(1,"Học tập", R.drawable.icons8_learn_28, "#c5e1a5"));
+//        categoryList.add(new Category(2, "Hoạt động", R.drawable.icons8_activity_28, "#e1bee7"));
+//        categoryList.add(new Category(3, "Học phí", R.drawable.icons8_tuition_fee_28, "#b3e5fc"));
 
         newsList = new ArrayList<>();
         newsList.add(new News(1,

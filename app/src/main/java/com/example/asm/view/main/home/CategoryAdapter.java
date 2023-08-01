@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.asm.R;
 import com.example.asm.model.Category;
 
@@ -39,9 +40,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-         holder.tv_category.setText(categoryList.get(position).getName());
-         holder.img_category.setImageResource(categoryList.get(position).getImg());
-         holder.cv_background.setCardBackgroundColor(Color.parseColor(categoryList.get(position).getColor()));
+         Category currentItem = categoryList.get(position);
+         holder.tv_category.setText(currentItem.getName());
+         Glide.with(context)
+                    .load(currentItem.getImg())
+                    .fitCenter()
+                    .into(holder.img_category)
+                 ;
+         holder.cv_background.setCardBackgroundColor(Color.parseColor(currentItem.getColor()));
 
          holder.cv_background.setOnClickListener(new View.OnClickListener() {
              @Override

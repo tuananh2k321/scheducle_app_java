@@ -102,21 +102,16 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn() {
         Intent intent = gsc.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN){
-
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
-
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-
                 firebaseAuth(account.getIdToken());
             }catch (ApiException e){
                 throw new RuntimeException(e);
@@ -124,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
 
     private void firebaseAuth(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
