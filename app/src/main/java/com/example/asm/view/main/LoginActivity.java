@@ -139,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                             users.setUserId(user.getUid());
                             users.setName(user.getDisplayName());
                             users.setProfile(user.getPhotoUrl().toString());
+                            users.setEmail(user.getEmail());
                             Log.d("users", "abc>>>>>>>>>: "+ users.toString());
 
                             database.getReference()
