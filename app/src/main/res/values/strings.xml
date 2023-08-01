@@ -15,8 +15,8 @@
         <!-- Thêm các item khác vào đây -->
     </string-array>
 
-    <string-array name="item_array_school">
-        <item>FPT Polytechnic HO<br/></item>
+    <string-array name="item_array_school" >
+        <item>FPT Polytechnic HO</item>
         <item>FPT Polytechnic Hà Nội</item>
         <item>FPT Polytechnic Hồ Chí Minh</item>
         <item>FPT Polytechnic Đà Nẵng</item>
