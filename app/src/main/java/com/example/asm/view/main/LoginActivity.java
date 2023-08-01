@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asm.R;
+import com.example.asm.view.main.adapter.ListSchoolAdapter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,18 +34,25 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     TextView tvchoose;
     Button btnLogin;
 
     AlertDialog.Builder builder;
+    ListSchoolAdapter adapter;
 
     //gg auth
     FirebaseAuth auth;
     FirebaseDatabase database;
     GoogleSignInClient gsc;
     ProgressDialog progressDialog;
+
+    SharedPreferences sharedPreferences;
+    String student_code;
 
     int RC_SIGN_IN = 40;
 
@@ -57,21 +66,35 @@ public class LoginActivity extends AppCompatActivity {
 
         builder = new AlertDialog.Builder(this);
 
+        List<String> list = new ArrayList<>();
+        list.add("FPT Polytechnic Hồ Chí Minh");
+        list.add("FPT Polytechnic Hà Nội");
+        list.add("FPT Polytechnic HO");
+        list.add("FPT Polytechnic Cần Thơ");
+        list.add("FPT Polytechnic Đà Nẵng");
+
+        adapter = new ListSchoolAdapter(LoginActivity.this, list);
+
         //tv school
+
+
         tvchoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                builder.setItems(R.array.item_array_school, new DialogInterface.OnClickListener() {
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String[] items = getResources().getStringArray(R.array.item_array_school);
-                        String selectedItem = items[which];
-                        tvchoose.setText(selectedItem);
+                        String selectItem = list.get(which);
+                        tvchoose.setText(selectItem);
                     }
                 });
-                builder.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
+
+        sharedPreferences = getSharedPreferences("data_user", MODE_PRIVATE);
+
 
         FirebaseApp.initializeApp(this);
         //gg
@@ -136,7 +159,21 @@ public class LoginActivity extends AppCompatActivity {
                             users.setName(user.getDisplayName());
                             users.setProfile(user.getPhotoUrl().toString());
                             users.setEmail(user.getEmail());
+                            String email = users.getEmail();
+                            int index = email.indexOf('@');
+                            if (index >= 0 && index >=7){
+                                student_code = email.substring(index - 7, index);
+                                Log.d("student codedddddddđ", "onComplete: "+student_code);
+                            }
+
+
                             Log.d("users", "abc>>>>>>>>>: "+ users.toString());
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("name_user", users.name);
+                            editor.putString("email_user", users.email);
+                            editor.putString("student_code", student_code);
+                            editor.commit();
 
                             database.getReference()
                                     .child("Users")

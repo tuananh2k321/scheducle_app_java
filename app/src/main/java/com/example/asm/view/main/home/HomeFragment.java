@@ -1,5 +1,7 @@
 package com.example.asm.view.main.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -42,6 +45,12 @@ public class HomeFragment extends Fragment {
     // category
     private ArrayList<Category> categoryList;
     private CategoryAdapter categoryAdapter;
+
+    TextView tv_name_student, tv_email_student;
+    SharedPreferences sharedPreferences;
+
+
+
 
     // news
     private ArrayList<News> newsList;
@@ -78,6 +87,23 @@ public class HomeFragment extends Fragment {
         binding.rcvNews.setLayoutManager(layoutManager1);
         newsAdapter = new NewsAdapter(getContext(), newsList);
         binding.rcvNews.setAdapter(newsAdapter);
+
+        tv_name_student= view.findViewById(R.id.tv_name_student);
+        tv_email_student= view.findViewById(R.id.tv_email_student);
+
+        sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
+
+        String name = sharedPreferences.getString("name_user", null);
+        String email = sharedPreferences.getString("email_user", null);
+        String student_code = sharedPreferences.getString("student_code", null);
+
+        if (name != null || email != null){
+            tv_name_student.setText(name);
+            tv_email_student.setText(email);
+        }
+
+
+
     }
 
     private Callback<CategoryRes> categoryResCallback = new Callback<CategoryRes>() {

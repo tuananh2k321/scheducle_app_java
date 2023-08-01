@@ -40,6 +40,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp">
                     <TextView
+                        android:id="@+id/tv_name_student"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tran Tuan Anh"
@@ -48,6 +49,7 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tv_email_student"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="anhttps24524@gmail.com"
