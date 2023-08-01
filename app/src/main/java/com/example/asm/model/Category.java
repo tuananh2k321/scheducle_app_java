@@ -3,17 +3,25 @@ package com.example.asm.model;
 public class Category {
     private int id;
     private String name;
-    private int img;
-    private String color;
+    private String image;
+    private String bgColor;
 
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", img='" + image + '\'' +
+                ", color='" + bgColor + '\'' +
+                '}';
+    }
 
-
-    public Category(int id, String name, int img, String color) {
+    public Category(int id, String name, String img, String color) {
         this.id = id;
         this.name = name;
-        this.img = img;
-        this.color = color;
+        this.image = img;
+        this.bgColor = color;
     }
     public int getId() {
         return id;
@@ -30,20 +38,20 @@ public class Category {
         this.name = name;
     }
 
-    public int getImg() {
-        return img;
+    public String getImg() {
+        return image;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setImg(String img) {
+        this.image = img;
     }
 
     public String getColor() {
-        return color;
+        return bgColor;
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.bgColor = color;
     }
 
 
