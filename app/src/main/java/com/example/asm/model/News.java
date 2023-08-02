@@ -4,15 +4,15 @@ public class News {
     private int id;
     private String title;
     private String detail;
-    private int img;
+    private String image;
 
     private Boolean isSeen;
     private int categoryId;
-    public News(int id, String title, String detail, int img, Boolean isSeen, int categoryId) {
+    public News(int id, String title, String detail, String img, Boolean isSeen, int categoryId) {
         this.id = id;
         this.title = title;
         this.detail = detail;
-        this.img = img;
+        this.image = img;
         this.isSeen = isSeen;
         this.categoryId = categoryId;
     }
@@ -41,12 +41,12 @@ public class News {
         this.detail = detail;
     }
 
-    public int getImg() {
-        return img;
+    public String getImg() {
+        return image;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setImg(String img) {
+        this.image = img;
     }
 
     public Boolean getSeen() {

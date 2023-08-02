@@ -43,7 +43,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         holder.tvTitle.setText(currentItem.getTitle());
         holder.tvDetail.setText(currentItem.getDetail());
-        holder.imgNews.setImageResource(currentItem.getImg());
+        //holder.imgNews.setImageResource(currentItem.getImg());
 
         if (notifyList.get(position).getSeen()) {
             holder.cvNews.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));

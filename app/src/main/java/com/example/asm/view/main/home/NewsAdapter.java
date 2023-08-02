@@ -2,6 +2,7 @@ package com.example.asm.view.main.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.asm.R;
+import com.example.asm.model.Category;
 import com.example.asm.model.News;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private Context context;
     private ArrayList<News> newsList;
+    private Listener listener;
 
-    public NewsAdapter(Context context, ArrayList<News> newsList){
+    public NewsAdapter(Context context, ArrayList<News> newsList, Listener listener){
         this.context = context;
         this.newsList = newsList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,22 +43,35 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.tvTitle.setText(newsList.get(position).getTitle());
-        holder.tvDetail.setText(newsList.get(position).getDetail());
-        holder.imgNews.setImageResource(newsList.get(position).getImg());
+        if (newsList != null) {
+            News currentItem = newsList.get(position);
+            holder.tvTitle.setText(newsList.get(position).getTitle());
+            holder.tvDetail.setText(newsList.get(position).getDetail());
+            Glide.with(context)
+                    .load(currentItem.getImg())
+                    .fitCenter()
+                    .into(holder.imgNews)
+            ;
 
-        holder.cvNews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, NewsDetailActivity.class);
-                context.startActivity(intent);
-            }
-        });
+            holder.cvNews.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("ID news adapter", ""+currentItem.getId());
+                    listener.getDetailNews(currentItem.getId());
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return newsList.size();
+        if (newsList != null) {
+            return newsList.size();
+            // Tiến hành các thao tác với ArrayList nếu nó không null
+            // Ví dụ: lấy dữ liệu, thêm phần tử, xóa phần tử, ...
+        } else {
+            return 1;
+        }
     }
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {

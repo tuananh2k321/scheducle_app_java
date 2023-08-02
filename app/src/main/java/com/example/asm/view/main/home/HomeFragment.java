@@ -1,5 +1,6 @@
 package com.example.asm.view.main.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.asm.R;
 import com.example.asm.api_res.CategoryRes;
+import com.example.asm.api_res.NewsRes;
 import com.example.asm.databinding.FragmentHomeBinding;
 import com.example.asm.model.Category;
 import com.example.asm.model.News;
@@ -29,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements Listener {
 
     private FragmentHomeBinding binding;
 
@@ -76,8 +78,8 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager1 =
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvNews.setLayoutManager(layoutManager1);
-        newsAdapter = new NewsAdapter(getContext(), newsList);
-        binding.rcvNews.setAdapter(newsAdapter);
+        iRetrofit.getAllNews().enqueue(newsResCallback);
+
     }
 
     private Callback<CategoryRes> categoryResCallback = new Callback<CategoryRes>() {
@@ -89,7 +91,7 @@ public class HomeFragment extends Fragment {
                     Log.e("categoryResCallback", "CategoryRes: " + "success");
                     Log.e("categoryResCallback", "CategoryRes: " + categoryRes.toString());
                     categoryList = categoryRes.getCategories();
-                    categoryAdapter = new CategoryAdapter(getContext(), categoryList);
+                    categoryAdapter = new CategoryAdapter(getContext(), categoryList, HomeFragment.this);
                     binding.rcvCategory.setAdapter(categoryAdapter);
                 } else {
                     Log.e("categoryResCallback", "CategoryRes: " + "fail");
@@ -103,11 +105,34 @@ public class HomeFragment extends Fragment {
         }
     };
 
+    private Callback<NewsRes> newsResCallback = new Callback<NewsRes>() {
+        @Override
+        public void onResponse(Call<NewsRes> call, Response<NewsRes> response) {
+            NewsRes newsRes = response.body();
+            if (newsRes != null) {
+                if (newsRes.getStatus()) {
+                    Log.e("newsResCallback", "newsResCallback: " + "success");
+                    Log.e("newsResCallback", "newsResCallback: " + newsRes.toString());
+                    newsList = newsRes.getNews();
+                    newsAdapter = new NewsAdapter(getContext(), newsList, HomeFragment.this);
+                    binding.rcvNews.setAdapter(newsAdapter);
+                } else {
+                    Log.e("newsResCallback", "newsResCallback: " + "fail");
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(Call<NewsRes> call, Throwable t) {
+            Log.e("newsResCallback", "onFailure: " + t.getMessage());
+        }
+    };
+
     private void initData() {
         sliderList = new ArrayList<>();
-        sliderList.add(new SlideModel(R.drawable.img_slider_1, ScaleTypes.CENTER_CROP));
-        sliderList.add(new SlideModel(R.drawable.img_slider_2, ScaleTypes.CENTER_CROP));
-        sliderList.add(new SlideModel(R.drawable.img_avatar, ScaleTypes.CENTER_CROP));
+        sliderList.add(new SlideModel(R.drawable.fpoly1, ScaleTypes.CENTER_CROP));
+        sliderList.add(new SlideModel(R.drawable.fpoly2, ScaleTypes.CENTER_CROP));
+        sliderList.add(new SlideModel(R.drawable.fpoly3, ScaleTypes.CENTER_CROP));
 
         categoryList = new ArrayList<>();
 //        categoryList.add(new Category(1,"Học tập", R.drawable.icons8_learn_28, "#c5e1a5"));
@@ -115,53 +140,21 @@ public class HomeFragment extends Fragment {
 //        categoryList.add(new Category(3, "Học phí", R.drawable.icons8_tuition_fee_28, "#b3e5fc"));
 
         newsList = new ArrayList<>();
-        newsList.add(new News(1,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                true,
-                1
-        ));
-        newsList.add(new News(2,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_avatar,
-                false,
-                1
-        ));
-        newsList.add(new News(3,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_2,
-                true,
-                1
-        ));
-        newsList.add(new News(4,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                true,
-                1
-        ));
-        newsList.add(new News(5,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                false,
-                1
-        ));
-        newsList.add(new News(6,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                false,
-                1
-        ));
+
+    }
+
+    @Override
+    public void getListNewsById(int id, String name) {
+        Intent intent = new Intent(getContext(), NewsListActivity.class);
+        intent.putExtra("categoryId", id);
+        intent.putExtra("categoryName", name);
+        startActivity(intent);
+    }
+
+    @Override
+    public void getDetailNews(int id) {
+        Intent intent = new Intent(getContext(), NewsDetailActivity.class);
+        intent.putExtra("newsId", id);
+        startActivity(intent);
     }
 }
