@@ -1,8 +1,8 @@
 package com.example.asm.view.main.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +23,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private Context context;
     private ArrayList<Category> categoryList;
+    private Listener categoryListener;
 
-    public CategoryAdapter(Context context,ArrayList<Category> categoryList) {
+
+    public CategoryAdapter(Context context,ArrayList<Category> categoryList, Listener categoryListener) {
         this.context = context;
         this.categoryList = categoryList;
+        this.categoryListener = categoryListener;
     }
 
 
@@ -52,8 +55,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          holder.cv_background.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 Intent intent = new Intent(context, NewsListActivity.class);
-                 context.startActivity(intent);
+                 Log.e("ID category", ""+currentItem.getId());
+                 categoryListener.getListNewsById(currentItem.getId(), currentItem.getName());
+
              }
          });
     }

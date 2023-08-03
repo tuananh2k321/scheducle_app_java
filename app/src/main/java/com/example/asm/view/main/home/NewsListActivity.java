@@ -3,16 +3,26 @@ package com.example.asm.view.main.home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-import com.example.asm.R;
+import com.example.asm.api_res.NewsRes;
 import com.example.asm.databinding.ActivityNewsListBinding;
 import com.example.asm.model.News;
+import com.example.asm.retrofit.IRetrofit;
+import com.example.asm.retrofit.RetrofitHelper;
 
 import java.util.ArrayList;
 
-public class NewsListActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class NewsListActivity extends AppCompatActivity implements Listener {
+    // retrofit
+    private IRetrofit iRetrofit;
     private ActivityNewsListBinding binding;
     private ArrayList<News> newsList;
     private NewsAdapter newsAdapter;
@@ -21,7 +31,9 @@ public class NewsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityNewsListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        dataInit();
+
+        // retrofit
+        iRetrofit = RetrofitHelper.createService(IRetrofit.class);
 
         // back
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
@@ -32,62 +44,38 @@ public class NewsListActivity extends AppCompatActivity {
         });
 
         // news list
+        Intent receivedIntent = getIntent();
+        int categoryId = receivedIntent.getIntExtra("categoryId", -1); // -1 là giá trị mặc định nếu không tìm thấy key
+        Log.e("categoryId news list", ""+categoryId);
+        String categoryName = receivedIntent.getStringExtra("categoryName");
+        binding.tvTitle.setText(categoryName);
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvNews.setLayoutManager(layoutManager);
-        newsAdapter = new NewsAdapter(this, newsList);
-        binding.rcvNews.setAdapter(newsAdapter);
+        iRetrofit.getNewsByCategory(categoryId).enqueue(newsResCallback);
     }
 
-    private void dataInit() {
-        newsList = new ArrayList<>();
-        newsList.add(new News(1,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                true,
-                1
-        ));
-        newsList.add(new News(2,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_avatar,
-                false,
-                1
-        ));
-        newsList.add(new News(3,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_2,
-                true,
-                1
-        ));
-        newsList.add(new News(4,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                true,
-                1
-        ));
-        newsList.add(new News(5,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                false,
-                1
-        ));
-        newsList.add(new News(6,
-                "THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023",
-                "Phòng Đào tạo thông báo đến các bạn sinh viên có tên trong danh sách dự kiến " +
-                        "làm Dự án tốt nghiệp học kỳ Fall 2023 về việc đăng ký nhóm và đề tài như sau: ",
-                R.drawable.img_slider_1,
-                false,
-                1
-        ));
-    }
+
+    private Callback<NewsRes> newsResCallback = new Callback<NewsRes>() {
+        @Override
+        public void onResponse(Call<NewsRes> call, Response<NewsRes> response) {
+            NewsRes newsRes = response.body();
+            if (newsRes != null) {
+                if (newsRes.getStatus()) {
+                    Log.e("newsResCallback", "newsResCallback: " + "success");
+                    Log.e("newsResCallback", "newsResCallback: " + newsRes.toString());
+                    newsList = newsRes.getNews();
+                    newsAdapter = new NewsAdapter(getApplicationContext(), newsList, NewsListActivity.this);
+                    binding.rcvNews.setAdapter(newsAdapter);
+                } else {
+                    Log.e("newsResCallback", "newsResCallback: " + "fail");
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(Call<NewsRes> call, Throwable t) {
+            Log.e("newsResCallback", "onFailure: " + t.getMessage());
+        }
+    };
 }

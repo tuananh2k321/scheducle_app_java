@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.main.home.NewsDetailActivity"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="50dp"
-                android:layout_gravity="left"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_baseline_arrow_back_24"/>
-            </androidx.cardview.widget.CardView>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_avatar"/>
-        </FrameLayout>
-
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023"
-                android:textSize="20sp"
-                android:textColor="@color/primaryColor"
-                android:textStyle="bold"/>
+            android:layout_height="match_parent"
+            tools:context=".view.main.home.NewsDetailActivity"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sinh viên thành lập nhóm và cử TRƯỞNG NHÓM đăng ký cho cả nhóm.
+                >
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="50dp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_baseline_arrow_back_24"/>
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/img_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_avatar"/>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="THÔNG BÁO ĐĂNG KÝ THỰC HIỆN DỰ ÁN TỐT NGHIỆP HỌC KỲ FALL 2023"
+                    android:textSize="20sp"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_detail"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sinh viên thành lập nhóm và cử TRƯỞNG NHÓM đăng ký cho cả nhóm.
 Đối với sinh viên không tìm được nhóm có thể tạo nhóm cá nhân ở chế độ công khai để các sinh viên chưa có nhóm còn lại tham gia nhóm hoặc Bộ môn sẽ phân nhóm ngẫu nhiên.
 Sinh viên đăng nhập mail FPT và truy cập link dangky.poly.edu.vn. Hướng dẫn sử dụng trang web đăng ký : tại đây
 Danh sách sinh viên (bao gồm đủ điều kiện, chưa đủ điều kiện và chờ kết quả kỳ Summer 2023) : DSSV Dự án TN Fall 2023
@@ -62,11 +69,12 @@ Ngành Tự Động Hóa - Cơ khí : 4-7sv/1 nhóm
 Ngành DLNHKS : 4-5sv/1 nhóm
 Ngành TKĐH : 4-7sv/1 nhóm
 Thời gian đăng ký: từ ngày 16/07/2023 đến 31/07/2023"
-                android:textSize="16sp"
-                android:textColor="@color/gray_light"
-                android:textStyle="bold"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/gray_light"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-    </LinearLayout>
+    </ScrollView>
 </layout>
