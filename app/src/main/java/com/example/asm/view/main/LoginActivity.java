@@ -18,6 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asm.R;
+import com.example.asm.api_res.LoginReq;
+import com.example.asm.api_res.LoginRes;
+import com.example.asm.retrofit.IRetrofit;
+import com.example.asm.retrofit.RetrofitHelper;
 import com.example.asm.view.main.adapter.ListSchoolAdapter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -37,6 +41,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     TextView tvchoose;
@@ -55,6 +63,12 @@ public class LoginActivity extends AppCompatActivity {
     String student_code;
 
     int RC_SIGN_IN = 40;
+
+    Users users;
+    FirebaseUser user;
+    String emailFirebase;
+    String address;
+    IRetrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +100,14 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String selectItem = list.get(which);
                         tvchoose.setText(selectItem);
+                        address= selectItem.toString();
                     }
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
         });
+
 
         sharedPreferences = getSharedPreferences("data_user", MODE_PRIVATE);
 
@@ -140,9 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
-
     }
-
 
     private void firebaseAuth(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
@@ -152,20 +166,22 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            FirebaseUser user = auth.getCurrentUser();
+                            user = auth.getCurrentUser();
 
-                            Users users = new Users();
+                            users = new Users();
                             users.setUserId(user.getUid());
                             users.setName(user.getDisplayName());
                             users.setProfile(user.getPhotoUrl().toString());
                             users.setEmail(user.getEmail());
-                            String email = users.getEmail();
-                            int index = email.indexOf('@');
+
+                            Log.d("___________", "onComplete: "+ user.getPhotoUrl().toString());
+
+                            emailFirebase = user.getEmail();
+                            int index = emailFirebase.indexOf('@');
                             if (index >= 0 && index >=7){
-                                student_code = email.substring(index - 7, index);
+                                student_code = emailFirebase.substring(index - 7, index);
                                 Log.d("student codedddddddđ", "onComplete: "+student_code);
                             }
-
 
                             Log.d("users", "abc>>>>>>>>>: "+ users.toString());
 
@@ -173,17 +189,18 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("name_user", users.name);
                             editor.putString("email_user", users.email);
                             editor.putString("student_code", student_code);
+                            editor.putString("img_user", user.getPhotoUrl().toString());
                             editor.commit();
 
-                            database.getReference()
-                                    .child("Users")
-                                    .child(user.getUid())
-                                    .setValue(users);
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                            IretrofitLogin1();
+//                            IretrofitRegister();
+                            //databáe realtime
+//                            database.getReference()
+//                                    .child("Users")
+//                                    .child(user.getUid())
+//                                    .setValue(users);
+
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT).show();
@@ -191,4 +208,37 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-}
+
+
+    public void IretrofitLogin1(){
+        retrofit = RetrofitHelper.createService(IRetrofit.class);
+        LoginReq loginRequestDTO = new LoginReq(user.getEmail(), user.getDisplayName(), address);
+        retrofit.login(loginRequestDTO).enqueue(login);
+    }
+
+    Callback<LoginRes> login = new Callback<LoginRes>() {
+        @Override
+        public void onResponse(Call<LoginRes> call, Response<LoginRes> response) {
+            if (response.isSuccessful()){
+                LoginRes loginResponse = response.body();
+                if (loginResponse.isStatus()){
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    //thành công, sang home
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                }else {
+                }
+
+            }
+        }
+
+        @Override
+        public void onFailure(Call<LoginRes> call, Throwable t) {
+            Log.d(">>> login fail", "onFailure: " + t.getMessage());
+        }
+    };
+
+
+
+    }

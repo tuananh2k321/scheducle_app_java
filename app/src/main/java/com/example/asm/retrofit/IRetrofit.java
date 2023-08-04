@@ -1,10 +1,14 @@
 package com.example.asm.retrofit;
 
 import com.example.asm.api_res.CategoryRes;
+import com.example.asm.api_res.LoginReq;
+import com.example.asm.api_res.LoginRes;
 import com.example.asm.api_res.NewsRes;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IRetrofit {
@@ -20,4 +24,9 @@ public interface IRetrofit {
 
     @GET("/api/news/get_detail_news.php")
     Call<NewsRes> getDetailNews(@Query("newsId") int newsId);
+
+
+
+    @POST("api/user/login.php")
+    Call<LoginRes> login(@Body LoginReq body);
 }

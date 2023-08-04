@@ -1,6 +1,8 @@
 package com.example.asm.view.main.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.asm.R;
@@ -48,6 +53,10 @@ public class HomeFragment extends Fragment implements Listener {
     // news
     private ArrayList<News> newsList;
     private NewsAdapter newsAdapter;
+
+    SharedPreferences sharedPreferences;
+    private TextView tv_name_student, tv_email_student;
+    private ImageView img_user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,6 +88,17 @@ public class HomeFragment extends Fragment implements Listener {
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvNews.setLayoutManager(layoutManager1);
         iRetrofit.getAllNews().enqueue(newsResCallback);
+
+        tv_name_student = view.findViewById(R.id.tv_name_student);
+        tv_email_student = view.findViewById(R.id.tv_email_student);
+
+        sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
+
+        tv_name_student.setText(sharedPreferences.getString("name_user", null));
+        tv_email_student.setText(sharedPreferences.getString("email_user", null));
+
+        img_user = view.findViewById(R.id.img_user);
+        Glide.with(this).load(sharedPreferences.getString("img_user",null)).into(img_user);
 
     }
 
