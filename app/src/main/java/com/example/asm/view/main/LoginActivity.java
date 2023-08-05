@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     String student_code;
 
-    int RC_SIGN_IN = 40;
+    int RC_SIGN_IN = 50;
 
     Users users;
     FirebaseUser user;
