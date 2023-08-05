@@ -229,6 +229,7 @@ public class LoginActivity extends AppCompatActivity {
                     //thành công, sang home
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 }else {
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                 }
 
             }
