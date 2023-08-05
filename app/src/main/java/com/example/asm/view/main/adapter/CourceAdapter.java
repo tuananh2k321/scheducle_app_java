@@ -1,39 +1,30 @@
 package com.example.asm.view.main.adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asm.R;
-import com.example.asm.view.main.model.Cource;
-import com.example.asm.view.main.model.DateModel;
+import com.example.asm.view.main.model.Schedules;
 import com.example.asm.view.main.recycleview.IRecycleview;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CourceAdapter extends RecyclerView.Adapter<CourceAdapter.CourceViewHolder>{
 
     private final IRecycleview iRecycleview;
 
 
-    private ArrayList<Cource> list;
+    private List<Schedules> list;
     private Context context;
 
-    public CourceAdapter(ArrayList<Cource> list, Context context, IRecycleview iRecycleview) {
+    public CourceAdapter(List<Schedules> list, Context context, IRecycleview iRecycleview) {
         this.list = list;
         this.context = context;
         this.iRecycleview = iRecycleview;
@@ -47,14 +38,12 @@ public class CourceAdapter extends RecyclerView.Adapter<CourceAdapter.CourceView
         View view = inflater.inflate(R.layout.itemcource,parent,false);
         return new CourceViewHolder(view, iRecycleview);
     }
-
     @Override
     public void onBindViewHolder(@NonNull CourceViewHolder holder, int position) {
-        holder.txtThoiGianBatDau.setText(list.get(position).getThoiGianBatDau()+"");
-        holder.txtThoiGianKetThuc.setText(list.get(position).getThoiGianKetThuc()+"");
-        holder.txtMon.setText(list.get(position).getMon()+" - "+ list.get(position).getMaMon());
-        holder.txtPhong.setText(list.get(position).getPhong()+"");
-        holder.txtGiangVien.setText(list.get(position).getGiangVien()+"");
+        holder.txtThoiGianBatDau.setText(list.get(position).getTime()+"");
+        holder.txtMon.setText(list.get(position).getCourse_name()+" - "+ list.get(position).getCourse_id());
+        holder.txtPhong.setText(list.get(position).getRoom()+"");
+        holder.txtGiangVien.setText(list.get(position).getTeacher_name()+"");
 
 
 
@@ -66,11 +55,10 @@ public class CourceAdapter extends RecyclerView.Adapter<CourceAdapter.CourceView
     }
 
     public static class CourceViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtThoiGianBatDau, txtThoiGianKetThuc, txtMon,txtPhong, txtGiangVien;
+        private TextView txtThoiGianBatDau, txtMon,txtPhong, txtGiangVien;
         public CourceViewHolder(@NonNull View itemView, IRecycleview iRecycleview) {
             super(itemView);
             txtThoiGianBatDau = itemView.findViewById(R.id.txtThoiGianBatDau);
-            txtThoiGianKetThuc = itemView.findViewById(R.id.txtThoiGianKetThuc);
             txtMon = itemView.findViewById(R.id.txtMon);
             txtPhong = itemView.findViewById(R.id.txtPhong);
             txtGiangVien = itemView.findViewById(R.id.txtGiangVien);
@@ -82,7 +70,7 @@ public class CourceAdapter extends RecyclerView.Adapter<CourceAdapter.CourceView
                         int pos = getAdapterPosition();
 
                         if(pos != RecyclerView.NO_POSITION){
-                            iRecycleview.onItemClic(pos);
+                            iRecycleview.onItemClickSchedule(pos);
                         }
                     }
                 }
