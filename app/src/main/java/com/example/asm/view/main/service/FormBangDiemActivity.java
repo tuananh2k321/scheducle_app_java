@@ -45,7 +45,7 @@ public class FormBangDiemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String service = "Cấp bảng điểm";
-                String studentCode = "ps12345";
+                String studentCode = "ps24524";
                 int quantity = Integer.parseInt(edt_sl.getText().toString());
                 String note = edt_note.getText().toString();
                 String phoneNumber = edt_sdt.getText().toString();
