@@ -3,7 +3,6 @@ package com.example.asm.view.main.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,11 +15,11 @@ import com.example.asm.view.main.model.ServiceComplete;
 
 import java.util.List;
 
-public class ServiceCompleteAdapter extends RecyclerView.Adapter<ServiceCompleteAdapter.ViewHolder> {
+public class ServiceCompleteAdapter2 extends RecyclerView.Adapter<ServiceCompleteAdapter2.ViewHolder> {
 
     private List<ServiceComplete> itemList;
 
-    public ServiceCompleteAdapter(List<ServiceComplete> itemList) {
+    public ServiceCompleteAdapter2(List<ServiceComplete> itemList) {
         this.itemList = itemList;
     }
 

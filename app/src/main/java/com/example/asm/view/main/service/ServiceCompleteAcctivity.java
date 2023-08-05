@@ -1,49 +1,46 @@
 package com.example.asm.view.main.service;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.asm.R;
-import com.example.asm.view.main.Adapter.ServiceCompleteAdapter;
+import com.example.asm.view.main.Adapter.ServiceCompleteAdapter2;
+import com.example.asm.view.main.Interface.IRetrofit;
+import com.example.asm.view.main.dto.GetAllServiceCompleteResponseDTO;
+import com.example.asm.view.main.helper.RetrofitHelper;
 import com.example.asm.view.main.model.ServiceComplete;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ServiceCompleteAcctivity extends AppCompatActivity {
-    private List<ServiceComplete> itemList;
-    private ServiceCompleteAdapter adapter;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerView;
+    IRetrofit iRetrofit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_complete_activity);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        iRetrofit = RetrofitHelper.createService(IRetrofit.class);
 
 
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        itemList = new ArrayList<>();
-        // Thêm các mục dữ liệu vào danh sách
-        itemList.add(new ServiceComplete("89123", "Cấp thẻ sinh viên", "More info 11111","của nhà trường","ngày 10/11/2023"));
-        itemList.add(new ServiceComplete("89123", "Cấp thẻ sinh viên", "More info 11111How to add Shadow effect in TextView in Android Studio","của nhà trường","ngày 10/11/2023"));
-        itemList.add(new ServiceComplete("89123", "Cấp thẻ sinh viên", "More info 11111","của nhà trường","ngày 10/11/2023"));
-        itemList.add(new ServiceComplete("89123", "Cấp thẻ sinh viên", "More info 11111How to add Shadow effect in TextView in Android Studio","của nhà trường","ngày 10/11/2023"));
-        itemList.add(new ServiceComplete("89123", "Cấp thẻ sinh viên", "More info 11111","của nhà trường","ngày 10/11/2023"));
-        // ...
 
-        adapter = new ServiceCompleteAdapter(itemList);
-        recyclerView.setAdapter(adapter);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -53,4 +50,34 @@ public class ServiceCompleteAcctivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        iRetrofit.getAllServiceComplete().enqueue(getAllServiceComplete);
+    }
+
+    Callback<GetAllServiceCompleteResponseDTO> getAllServiceComplete = new Callback<GetAllServiceCompleteResponseDTO>() {
+        @Override
+        public void onResponse(Call<GetAllServiceCompleteResponseDTO> call, Response<GetAllServiceCompleteResponseDTO> response) {
+            if (response.isSuccessful()){
+                GetAllServiceCompleteResponseDTO products = response.body();
+                Log.d(">>>>>TAG", "onResponse: " +products.getStatus());
+                if(products.getStatus().equals("success")){
+                    Log.d(">>>>>>>>TAG", "onResponse: " + products.getList());
+                    List<ServiceComplete> list = products.getList();
+                    Log.d(">>>>>>>> list TAG", "onResponse: " + list);
+                    adapter = new ServiceCompleteAdapter2(list);
+                    recyclerView.setAdapter(adapter);
+                }
+
+
+            }
+        }
+
+        @Override
+        public void onFailure(Call<GetAllServiceCompleteResponseDTO> call, Throwable t) {
+            Log.d(">>> login", "onFailure: " + t.getMessage());
+        }
+    };
 }

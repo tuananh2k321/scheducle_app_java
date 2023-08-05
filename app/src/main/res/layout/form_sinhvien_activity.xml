@@ -75,7 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_mucdich" />
 
             <TextView
-                android:id="@+id/edt_xacnhan"
+                android:id="@+id/tv_xacnhan"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -106,7 +106,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword2" />
 
             <EditText
-                android:id="@+id/editTextNumberPassword3"
+                android:id="@+id/edt_sdt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -134,8 +134,8 @@
                 android:textColor="#2E3192"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/editTextNumberPassword3"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword3" />
+                app:layout_constraintStart_toStartOf="@+id/edt_sdt"
+                app:layout_constraintTop_toBottomOf="@+id/edt_sdt" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -151,7 +151,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <EditText
-                android:id="@+id/editTextNumberPassword4"
+                android:id="@+id/edt_note"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
@@ -170,7 +170,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="16dp"
