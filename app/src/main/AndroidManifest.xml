@@ -18,8 +18,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ASM"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        tools:targetApi="31">
         <activity
 
             android:name=".view.main.home.NewsDetailActivity"
@@ -28,16 +27,16 @@
             android:name=".view.main.home.NewsListActivity"
             android:exported="false" />
         <activity android:name=".view.main.MainActivity"
-            android:exported="false">
-
-        </activity>
-        <activity android:name=".view.main.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".view.main.LoginActivity"
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".view.main.service.ServiceCompleteAcctivity"
