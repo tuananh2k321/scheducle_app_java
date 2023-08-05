@@ -6,9 +6,9 @@ public class News {
     private String detail;
     private String image;
 
-    private Boolean isSeen;
+    private int isSeen;
     private int categoryId;
-    public News(int id, String title, String detail, String img, Boolean isSeen, int categoryId) {
+    public News(int id, String title, String detail, String img, int isSeen, int categoryId) {
         this.id = id;
         this.title = title;
         this.detail = detail;
@@ -49,11 +49,11 @@ public class News {
         this.image = img;
     }
 
-    public Boolean getSeen() {
+    public int getSeen() {
         return isSeen;
     }
 
-    public void setSeen(Boolean seen) {
+    public void setSeen(int seen) {
         isSeen = seen;
     }
 

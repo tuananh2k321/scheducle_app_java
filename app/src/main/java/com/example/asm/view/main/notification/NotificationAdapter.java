@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.asm.R;
 import com.example.asm.model.News;
 import com.example.asm.view.main.home.NewsAdapter;
@@ -43,25 +44,33 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         holder.tvTitle.setText(currentItem.getTitle());
         holder.tvDetail.setText(currentItem.getDetail());
-        //holder.imgNews.setImageResource(currentItem.getImg());
+        Glide.with(context)
+                .load(currentItem.getImg())
+                .fitCenter()
+                .into(holder.imgNews)
+        ;
 
-        if (notifyList.get(position).getSeen()) {
-            holder.cvNews.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        if (notifyList.get(position).getSeen() == 0) {
+            holder.cvNews.setCardBackgroundColor(ContextCompat.getColor(context, R.color.blue));
         }
         holder.cvNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentItem.setSeen(true);
-                holder.cvNews.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
-                Intent intent = new Intent(context, NewsDetailActivity.class);
-                context.startActivity(intent);
+                if (notifyList != null) {
+                    currentItem.setSeen(1);
+                    holder.cvNews.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return notifyList.size();
+        if (notifyList != null) {
+        return notifyList.size();}
+        else {
+            return 0;
+        }
     }
 
     public static class NotificationViewHolder extends RecyclerView.ViewHolder{

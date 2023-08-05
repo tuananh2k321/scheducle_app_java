@@ -15,6 +15,9 @@ public interface IRetrofit {
     @GET("/api/news/get_news.php")
     Call<NewsRes> getAllNews();
 
+    @GET("/api/notification/get_notification_by_id.php")
+    Call<NewsRes> getNotification(@Query("userId") String userId);
+
     @GET("/api/news/get_news_by_category.php")
     Call<NewsRes> getNewsByCategory(@Query("categoryId") int categoryId);
 
