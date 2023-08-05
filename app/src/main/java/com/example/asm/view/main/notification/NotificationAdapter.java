@@ -59,6 +59,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 if (notifyList != null) {
                     currentItem.setSeen(1);
                     holder.cvNews.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                    Intent intent = new Intent(context, NewsDetailActivity.class);
+                    context.startActivity(intent);
                 }
             }
         });
