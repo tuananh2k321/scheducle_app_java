@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         >
             <LinearLayout
@@ -54,6 +54,7 @@
                 app:tabIndicatorGravity="stretch"
                 app:tabSelectedTextColor="@color/white"
                 app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorColor="@null"
                 app:tabIndicator="@drawable/tab_indicator"
                 android:background="@drawable/tab_rect"
                 android:layout_marginHorizontal="24dp"

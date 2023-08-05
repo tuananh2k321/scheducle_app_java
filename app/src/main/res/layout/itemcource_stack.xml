@@ -4,47 +4,20 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_marginVertical="5sp"
-    android:padding="5dp"
-    >
-
-    <LinearLayout
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
-        <TextView
-            android:id="@+id/txtThoiGianBatDau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="17:30 - 19:30 PM"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="5sp"
-            />
-    </LinearLayout>
-
-    <View
-        android:layout_width="2sp"
-        android:layout_height="match_parent"
-        android:background="@color/primaryColor"
-        android:layout_marginHorizontal="10sp"
-        />
+    android:layout_marginVertical="20sp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:elevation="@dimen/cardview_compat_inset_shadow"
+        app:cardCornerRadius="16sp"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16sp"
-            android:background="@drawable/custom_selector_cource"
+            android:background="@color/primaryColor"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:text="React Native - MOB1234"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp"/>
                 <TextView
                     android:id="@+id/txtNoiDung"
@@ -65,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="Chapter 1: Cài đặt môi trường Re..."
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:layout_marginTop="4sp"/>
                 <LinearLayout
@@ -76,14 +49,14 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/icon_location_on_24"/>
+                        android:src="@drawable/img_location"/>
                     <TextView
                         android:id="@+id/txtPhong"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Phòng T1109"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:layout_marginLeft="4sp"/>
                 </LinearLayout>
@@ -103,11 +76,26 @@
                         android:layout_height="wrap_content"
                         android:text="Nguyễn Trí Định"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:layout_marginLeft="4sp"/>
                 </LinearLayout>
+                
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0">
+                <TextView
+                    android:id="@+id/txtGio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="17:30 - 19:30 PM"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
             </LinearLayout>
 
         </LinearLayout>

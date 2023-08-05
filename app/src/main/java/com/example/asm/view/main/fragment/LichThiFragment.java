@@ -1,38 +1,61 @@
 package com.example.asm.view.main.fragment;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.StackView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asm.R;
 import com.example.asm.view.main.adapter.CourceAdapter;
 import com.example.asm.view.main.adapter.DateAdapter;
+import com.example.asm.view.main.adapter.StackAdapter;
+import com.example.asm.view.main.dto.SchedulesResponeDTO;
+import com.example.asm.view.main.helpers.IRetrofitInterface;
+import com.example.asm.view.main.helpers.RetrofitHelper;
 import com.example.asm.view.main.model.Cource;
 import com.example.asm.view.main.model.DateModel;
+import com.example.asm.view.main.model.Schedules;
 import com.example.asm.view.main.recycleview.IRecycleview;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LichThiFragment extends Fragment implements IRecycleview {
     ArrayList<DateModel> listDate;
-    ArrayList<Cource> listCource;
+    List<Schedules> listSchedule;
     RecyclerView recyclerViewDate, recyclerViewCource;
+    // import interface retrofit
+    IRetrofitInterface iRetrofitInterface;
+    CourceAdapter adapter2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,67 +64,77 @@ public class LichThiFragment extends Fragment implements IRecycleview {
         View view = inflater.inflate(R.layout.fragment_lich_thi, container, false);
         recyclerViewDate = view.findViewById(R.id.recyclerViewDate);
         recyclerViewCource = view.findViewById(R.id.recyclerViewCource);
+        listSchedule = new ArrayList<>();
+
+        iRetrofitInterface = RetrofitHelper.createService(IRetrofitInterface.class);
+
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        int type = 0;
+        String user_id = "ps24513";
+        String date = "2023-08-01";
+        Map<String, String> queries = new HashMap<>();
+        queries.put("user_id" , user_id+"");
+        queries.put("type" , type+"");
+        queries.put("date" , date);
+
+        iRetrofitInterface.getSchedules(queries).enqueue(schedulesCallBack);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initData();
+        initDataDate();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL, false);
         recyclerViewDate.setLayoutManager(layoutManager);
-        DateAdapter adapter = new DateAdapter(listDate, getContext());
+        DateAdapter adapter = new DateAdapter(listDate, getContext(), this);
         recyclerViewDate.setAdapter(adapter);
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         recyclerViewCource.setLayoutManager(layoutManager2);
-        CourceAdapter adapter2 = new CourceAdapter(listCource, getContext(), this);
+        adapter2 = new CourceAdapter(listSchedule, getContext(), this);
         recyclerViewCource.setAdapter(adapter2);
     }
+    Callback<SchedulesResponeDTO> schedulesCallBack = new Callback<SchedulesResponeDTO>() {
+        @Override
+        public void onResponse(Call<SchedulesResponeDTO> call, Response<SchedulesResponeDTO> response) {
+            if (response.isSuccessful()){
+                SchedulesResponeDTO getSchedulesResponeDTO = response.body();
+                listSchedule.clear();
+                listSchedule.addAll(getSchedulesResponeDTO.getData());
+                adapter2.notifyDataSetChanged();
+            }
+        }
 
-    private void initData(){
-        // danh sach Date
-        listDate = new ArrayList<>();
-        listDate.add(new DateModel(1, 21, "S"));
-        listDate.add(new DateModel(2, 22, "M"));
-        listDate.add(new DateModel(3, 23, "T"));
-        listDate.add(new DateModel(4, 24, "W"));
-        listDate.add(new DateModel(5, 25, "T"));
-        listDate.add(new DateModel(6, 26, "F"));
-        listDate.add(new DateModel(7, 27, "S"));
-
-        //danh sach mon hoc
-        listCource = new ArrayList<>();
-        listCource.add(new Cource(1,"27/07/2003","T308 (Nha T)", "Phan Mem Quang Trung",
-                "MOB403", "Android Networking", "MD17306",
-                "channn3", "5", "17:30","19:30",""));
-        listCource.add(new Cource(2,"28/07/2003","T308 (Nha T)", "Phan Mem Quang Trung",
-                "MOB403", "Android Networking", "MD17306",
-                "channn3", "5", "17:30","19:30",""));
-        listCource.add(new Cource(3,"29/07/2003","T308 (Nha T)", "Phan Mem Quang Trung",
-                "MOB403", "Android Networking", "MD17306",
-                "channn3", "5", "17:30","19:30",""));
-        listCource.add(new Cource(4,"30/07/2003","T308 (Nha T)", "Phan Mem Quang Trung",
-                "MOB403", "Android Networking", "MD17306",
-                "channn3", "5", "17:30","19:30",""));
-        listCource.add(new Cource(5,"31/07/2003","T308 (Nha T)", "Phan Mem Quang Trung",
-                "MOB403", "Android Networking", "MD17306",
-                "channn3", "5", "17:30","19:30",""));
-        listCource.add(new Cource(6,"01/08/2003","T308 (Nha T)", "Phan Mem Quang Trung",
-                "MOB403", "Android Networking", "MD17306",
-                "channn3", "5", "17:30","19:30",""));
-
+        @Override
+        public void onFailure(Call<SchedulesResponeDTO> call, Throwable t) {
+            Log.d(">>> SchedulesResponeDTO", "onFailure: " + t.getMessage());
+        }
+    };
+    @Override
+    public void onItemClickSchedule(int position) {
+        Toast.makeText(getContext(), "Click item", Toast.LENGTH_LONG);
+        getAllCource(Gravity.CENTER, position);
     }
 
     @Override
-    public void onItemClic(int position) {
-        Toast.makeText(getContext(), "Click item", Toast.LENGTH_LONG);
-        getAllCource(Gravity.CENTER);
-
+    public void onItemClickDate(int position) {
+        Toast.makeText(getContext(), "Click item date", Toast.LENGTH_LONG);
+        int type = 0;
+        String user_id = "ps24513";
+        String date = listDate.get(position).getNgayThangNam();
+        Map<String, String> queries = new HashMap<>();
+        queries.put("type" , type+"");
+        queries.put("user_id" , user_id+"");
+        queries.put("date" , date);
+        iRetrofitInterface.getSchedules(queries).enqueue(schedulesCallBack);
     }
 
-    private void getAllCource(int gravity){
+    private void getAllCource(int gravity, int position){
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -124,7 +157,24 @@ public class LichThiFragment extends Fragment implements IRecycleview {
             dialog.setCancelable(false);
         }
 
-        Button btnOk = dialog.findViewById(R.id.btnOk);
+        AppCompatButton btnOk = dialog.findViewById(R.id.btnOk);
+        TextView txtNgay = dialog.findViewById(R.id.txtNgay);
+        TextView txtPhong = dialog.findViewById(R.id.txtPhong);
+        TextView txtGiangDuong = dialog.findViewById(R.id.txtGiangDuong);
+        TextView txtLop = dialog.findViewById(R.id.txtLop);
+        TextView txtThoiGian = dialog.findViewById(R.id.txtThoiGian);
+        TextView txtMon = dialog.findViewById(R.id.txtMon);
+        TextView txtMaMon = dialog.findViewById(R.id.txtMaMon);
+        TextView txtGiangVien = dialog.findViewById(R.id.txtGiangVien);
+
+        txtNgay.setText("Ngày: "+listSchedule.get(position).getDay());
+        txtPhong.setText("Phòng: "+listSchedule.get(position).getRoom());
+        txtGiangDuong.setText("Giảng đường: "+listSchedule.get(position).getAddress());
+        txtLop.setText("Lớp: "+listSchedule.get(position).getClass_name());
+        txtThoiGian.setText("Thời gian: "+listSchedule.get(position).getTime());
+        txtMon.setText("Môn: "+listSchedule.get(position).getCourse_name());
+        txtMaMon.setText("Mã môn: "+listSchedule.get(position).getCourse_id());
+        txtGiangVien.setText("Giảng viên:"+listSchedule.get(position).getTeacher_name());
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,5 +184,32 @@ public class LichThiFragment extends Fragment implements IRecycleview {
         });
 
         dialog.show();
+    }
+
+    private void initDataDate(){
+        // danh sach Date
+        listDate = new ArrayList<>();
+        listDate.add(new DateModel(1, 1, "TUE","2023-08-01"));
+        listDate.add(new DateModel(2, 2, "WED", "2023-08-02"));
+        listDate.add(new DateModel(3, 3, "THU", "2023-08-03"));
+        listDate.add(new DateModel(4, 4, "FRI", "2023-08-04"));
+        listDate.add(new DateModel(5, 5, "SAT", "2023-08-05"));
+        listDate.add(new DateModel(6, 6, "SUN", "2023-08-06"));
+        listDate.add(new DateModel(7, 7, "MON", "2023-08-07"));
+        listDate.add(new DateModel(8, 8, "TUE", "2023-08-08"));
+        listDate.add(new DateModel(9, 9, "WED", "2023-08-09"));
+        listDate.add(new DateModel(10, 10, "THU", "2023-08-10"));
+        listDate.add(new DateModel(11, 11, "FRI", "2023-08-11"));
+        listDate.add(new DateModel(12, 12, "SAT", "2023-08-12"));
+        listDate.add(new DateModel(13, 13, "SUN", "2023-08-13"));
+        listDate.add(new DateModel(14, 14, "MON", "2023-08-14"));
+        listDate.add(new DateModel(15, 15, "TUE", "2023-08-15"));
+        listDate.add(new DateModel(16, 16, "WED", "2023-08-16"));
+        listDate.add(new DateModel(17, 17, "THU", "2023-08-17"));
+
+
+        //danh sach mon hoc
+
+
     }
 }

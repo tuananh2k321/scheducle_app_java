@@ -65,7 +65,7 @@ public class CalendarFragment extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-        viewPager2Adapter = new ViewPager2Adapter(fragmentManager,getActivity().getLifecycle());
+        viewPager2Adapter = new ViewPager2Adapter(fragmentManager, getActivity().getLifecycle());
         viewPager2.setAdapter(viewPager2Adapter);
 
         tabLayout.addTab(tabLayout.newTab().setText("Lịch học"));
@@ -98,85 +98,6 @@ public class CalendarFragment extends Fragment {
         });
 
 
-
-//        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-//            @Override
-//            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-//                if (position == 0){
-//                    tab.setText("Lịch học");
-//                }else {
-//                    tab.setText("Lịch thi");
-//                }
-//            }
-//        }).attach();
-
-        
-
-        //initView();
-
-
-    }
-
-//    private void initView() {
-//        viewPagerAdapter = new ViewPagerAdapter(this.getActivity().getSupportFragmentManager(),
-//                this.getActivity().getLifecycle());
-//        viewPagerAdapter.addFragment(new LichHocFragment(), "Lịch học");
-//        viewPagerAdapter.addFragment(new LichThiFragment(), "Lịch thi");
-//        viewPager2.setAdapter(viewPagerAdapter);
-//        viewPager2.setOffscreenPageLimit(1);
-//
-////        new TabLayoutMediator(tabLayout, viewPager2,
-////                (tab, position) -> {
-////                    tab.setText(viewPagerAdapter.fragmentTitleList.get(position));
-////                }).attach();
-//
-//        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-//            @Override
-//            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-//                switch (position){
-//                    case 1:
-//                        tab.setText("Lịch Học");
-//                        break;
-//                    case 2:
-//                        tab.setText("Lịch Thi");
-//                        break;
-//                }
-//            }
-//        }).attach();
-//
-//        for (int i = 0; i < tabLayout.getTabCount(); i++){
-//            TextView tv = (TextView) LayoutInflater.from(this.getActivity())
-//                    .inflate(R.layout.custom_tab, null);
-//            tabLayout.getTabAt(i).setCustomView(tv);
-//        }
-//
-//    }
-
-    class ViewPagerAdapter extends FragmentStateAdapter{
-
-        private final List<Fragment> fragmentList = new ArrayList<>();
-        private final List<String> fragmentTitleList = new ArrayList<>();
-
-
-        public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-            super(fragmentManager, lifecycle);
-        }
-
-        public void addFragment(Fragment fragment, String title){
-            fragmentList.add(fragment);
-            fragmentTitleList.add(title);
-        }
-
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return fragmentList.size();
-        }
     }
 
 
