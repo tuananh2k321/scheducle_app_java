@@ -1,4 +1,4 @@
-package com.example.asm.view.main.adapter;
+package com.example.asm.view.main.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -188,7 +188,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/thongbao_txt"
         app:layout_constraintTop_toBottomOf="@+id/thongbao_txt" />
 

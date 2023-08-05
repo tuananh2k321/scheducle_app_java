@@ -56,7 +56,7 @@ public class ServiceFragment extends Fragment {
         linearLayout5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), FormStudentActivity.class));
+                startActivity(new Intent(getContext(), FormConfirmStudentActivity.class));
             }
         });
     }

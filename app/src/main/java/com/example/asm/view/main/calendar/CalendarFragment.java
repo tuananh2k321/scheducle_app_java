@@ -19,13 +19,8 @@ import android.widget.TextView;
 
 import com.example.asm.R;
 import com.example.asm.databinding.FragmentCalendarBinding;
-import com.example.asm.view.main.adapter.CourceAdapter;
-import com.example.asm.view.main.adapter.DateAdapter;
-import com.example.asm.view.main.adapter.ViewPager2Adapter;
-import com.example.asm.view.main.fragment.LichHocFragment;
-import com.example.asm.view.main.fragment.LichThiFragment;
-import com.example.asm.view.main.model.Cource;
-import com.example.asm.view.main.model.DateModel;
+
+import com.example.asm.view.main.Adapter.ViewPager2Adapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
