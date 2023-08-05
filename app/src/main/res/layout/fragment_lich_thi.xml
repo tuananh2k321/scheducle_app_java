@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="24sp"
         android:background="@drawable/custombackground">
@@ -59,15 +59,11 @@
                 android:src="@drawable/icon_sort_amount_down"/>
         </LinearLayout>
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recyclerViewCource"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            tools:listitem="@layout/itemcource"/>-->
-        <StackView
-            android:id="@+id/stackView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCource"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/itemcource"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_marginVertical="5sp">
+    android:layout_marginVertical="5sp"
+    android:padding="5dp"
+    >
 
     <LinearLayout
         android:layout_width="70dp"
@@ -16,40 +18,33 @@
             android:id="@+id/txtThoiGianBatDau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="07:30"
+            android:text="17:30 - 19:30 PM"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:layout_marginTop="5sp"/>
-        <TextView
-            android:id="@+id/txtThoiGianKetThuc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="07:30"
-            android:textStyle="bold"
-            android:textColor="@color/gray"
-            android:textSize="14sp"/>
+            android:layout_marginTop="5sp"
+            />
     </LinearLayout>
 
     <View
-        android:layout_width="1sp"
+        android:layout_width="2sp"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:layout_marginRight="18sp"
+        android:layout_marginHorizontal="10sp"
         />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:cardCornerRadius="16sp"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16sp"
-            android:background="@color/green"
+            android:background="@drawable/custom_selector_cource"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="React Native - MOB1234"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp"/>
                 <TextView
                     android:id="@+id/txtNoiDung"
@@ -70,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="Chapter 1: Cài đặt môi trường Re..."
                     android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:layout_marginTop="4sp"/>
                 <LinearLayout
@@ -81,14 +76,14 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/img_location"/>
+                        android:src="@drawable/icon_location_on_24"/>
                     <TextView
                         android:id="@+id/txtPhong"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Phòng T1109"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         android:layout_marginLeft="4sp"/>
                 </LinearLayout>
@@ -108,11 +103,11 @@
                         android:layout_height="wrap_content"
                         android:text="Nguyễn Trí Định"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         android:layout_marginLeft="4sp"/>
                 </LinearLayout>
-                
+
             </LinearLayout>
 
         </LinearLayout>
