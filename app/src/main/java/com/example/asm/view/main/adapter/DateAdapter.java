@@ -25,6 +25,9 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
     private ArrayList<DateModel> list;
     private static Context context;
 
+    private static int selectedItem = -1;
+
+
     public DateAdapter(ArrayList<DateModel> list, Context context, IRecycleview iRecycleview) {
         this.list = list;
         this.context = context;
@@ -44,6 +47,29 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
         DateModel currentItem = list.get(position);
         holder.txtNgay.setText(list.get(position).getNgay()+"");
         holder.txtThu.setText(list.get(position).getThu()+"");
+
+        // Kiểm tra xem item hiện tại có phải là item được chọn hay không
+        if (selectedItem == position) {
+            holder.lnlDate.setBackgroundColor(ContextCompat.getColor(context, R.color.primaryColor));
+            holder.txtNgay.setTextColor(ContextCompat.getColor(context, R.color.white));
+            holder.txtThu.setTextColor(ContextCompat.getColor(context, R.color.white));
+        } else {
+            // Nếu không phải item được chọn, sử dụng màu mặc định
+            holder.lnlDate.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            holder.txtNgay.setTextColor(ContextCompat.getColor(context, R.color.black));
+            holder.txtThu.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+
+        holder.lnlDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Cập nhật vị trí của item được chọn
+                selectedItem = position;
+                // Gọi notifyDataSetChanged để cập nhật giao diện
+                notifyDataSetChanged();
+            }
+        });
+
 
     }
 
@@ -67,6 +93,9 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
                         int pos = getAdapterPosition();
                         int seleted = -1;
                         seleted = pos;
+
+                        // Cập nhật vị trí của item được chọn
+                        selectedItem = pos;
 
                         if(pos != RecyclerView.NO_POSITION){
                             iRecycleview.onItemClickDate(pos);
