@@ -51,7 +51,7 @@ public class ServiceFragment extends Fragment {
                 .requestEmail()
                         .build();
 
-        gsc = GoogleSignIn.getClient(getContext(), gso);
+        gsc = GoogleSignIn.getClient(getActivity(), gso);
 
 //        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
@@ -88,7 +88,7 @@ public class ServiceFragment extends Fragment {
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                startActivity(new Intent(getContext().getApplicationContext(), LoginActivity.class));
+                startActivity(new Intent(getActivity().getApplicationContext(), LoginActivity.class));
                 getActivity().finish();
             }
         });
