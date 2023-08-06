@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class ServiceFragment extends Fragment {
 
-    private LinearLayout dangki_dv,linearLayout2,linearLayout3,linearLayout5;
+    private LinearLayout dangki_dv,linearLayout2,linearLayout3,linearLayout5, logout;
     private GoogleSignInOptions gso;
     private GoogleSignInClient gsc;
 
@@ -44,6 +44,13 @@ public class ServiceFragment extends Fragment {
         linearLayout2 =view.findViewById(R.id.linearLayout2);
         linearLayout3 =view.findViewById(R.id.linearLayout3);
         linearLayout5 =view.findViewById(R.id.linearLayout5);
+        logout = view.findViewById(R.id.logout_gg);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LogOutGG();
+            }
+        });
 
 
         //gg
