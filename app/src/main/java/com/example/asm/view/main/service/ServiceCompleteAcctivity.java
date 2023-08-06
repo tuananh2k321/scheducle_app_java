@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.asm.R;
-import com.example.asm.view.main.Adapter.ServiceCompleteAdapter2;
+import com.example.asm.view.main.Adapter.ServiceCompleteAdapter3;
 import com.example.asm.view.main.Interface.IRetrofit;
 import com.example.asm.view.main.dto.GetAllServiceCompleteResponseDTO;
 import com.example.asm.view.main.helper.RetrofitHelper;
@@ -67,7 +67,7 @@ public class ServiceCompleteAcctivity extends AppCompatActivity {
                     Log.d(">>>>>>>>TAG", "onResponse: " + products.getList());
                     List<ServiceComplete> list = products.getList();
                     Log.d(">>>>>>>> list TAG", "onResponse: " + list);
-                    adapter = new ServiceCompleteAdapter2(list);
+                    adapter = new ServiceCompleteAdapter3(list);
                     recyclerView.setAdapter(adapter);
                 }
 
@@ -77,7 +77,7 @@ public class ServiceCompleteAcctivity extends AppCompatActivity {
 
         @Override
         public void onFailure(Call<GetAllServiceCompleteResponseDTO> call, Throwable t) {
-            Log.d(">>> login", "onFailure: " + t.getMessage());
+            Log.d(">>> getService", "onFailure: " + t.getMessage());
         }
     };
 }

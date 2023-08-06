@@ -3,7 +3,6 @@ package com.example.asm.view.main.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,35 +23,41 @@ public class ServiceCompleteAdapter extends RecyclerView.Adapter<ServiceComplete
         this.itemList = itemList;
     }
 
-    @NonNull
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ServiceCompleteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_service_complete, parent, false);
-        return new ViewHolder(view);
+        return new ServiceCompleteAdapter.ViewHolder(view);
     }
 
 
 
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ServiceCompleteAdapter.ViewHolder holder, int position) {
 
         holder.id_txt.setText(String.valueOf(itemList.get(position).getId()));
         holder.loai_txt.setText(itemList.get(position).getService());
-        holder.confirm_txt.setText(itemList.get(position).getConfirm());
-        holder.date_txt.setText(itemList.get(position).getDate());
-        holder.thongbao_txt.setText(itemList.get(position).getThongbao());
+        holder.confirm_txt.setText(itemList.get(position).getQuantity());
+        holder.date_txt.setText(itemList.get(position).getPhoneNumber());
+        holder.thongbao_txt.setText(itemList.get(position).getMucdich());
+        holder.tv_confirm.setText(itemList.get(position).getConfirm());
+
 
         boolean isExpanded = itemList.get(position).isExpanded();
         holder.confirm_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.date_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        holder.thongbao_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.date_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        holder.tb_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.confirm_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-      //  holder.hd_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.linearLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-       // holder.btn_huy.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+        if(itemList.get(position).getService().equals("Giấy xác nhận sinh viên")){
+            holder.hd_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            holder.tv_confirm.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            holder.tb_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            holder.thongbao_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        }
         if (isExpanded) {
             holder.img_arrow.setImageResource(R.drawable.ic_arrow_down);
         } else {
@@ -73,7 +78,7 @@ public class ServiceCompleteAdapter extends RecyclerView.Adapter<ServiceComplete
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView id_txt,loai_txt,date_txt,confirm_txt,thongbao_txt,btn_huy,date_dk,confirm_dk,tb_dk,hd_dk;
+        TextView id_txt,loai_txt,date_txt,confirm_txt,thongbao_txt,date_dk,confirm_dk,tb_dk,hd_dk,tv_confirm;
         ImageView img_arrow;
         LinearLayout linearLayout;
 
@@ -85,12 +90,12 @@ public class ServiceCompleteAdapter extends RecyclerView.Adapter<ServiceComplete
             date_txt = itemView.findViewById(R.id.date_txt);
             confirm_txt = itemView.findViewById(R.id.confirm_txt);
             thongbao_txt = itemView.findViewById(R.id.thongbao_txt);
-            btn_huy = itemView.findViewById(R.id.btn_huy);
             img_arrow = itemView.findViewById(R.id.img_arrow);
             date_dk = itemView.findViewById(R.id.date_dk);
             confirm_dk = itemView.findViewById(R.id.confirm_dk);
             tb_dk = itemView.findViewById(R.id.tb_dk);
             hd_dk = itemView.findViewById(R.id.hd_dk);
+            tv_confirm = itemView.findViewById(R.id.tv_confirm);
             linearLayout = itemView.findViewById(R.id.linearLayout);
         }
     }

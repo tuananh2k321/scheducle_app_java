@@ -68,7 +68,7 @@ public class FromCardStudentActivity extends AppCompatActivity {
 
 
                 iRetrofit = RetrofitHelper.createService(IRetrofit.class);
-                InsertStudentServiceRequestDTO insertStudentServiceRequestDTO = new InsertStudentServiceRequestDTO(service,img,"ps24412",phoneNumber,note,1);
+                InsertStudentServiceRequestDTO insertStudentServiceRequestDTO = new InsertStudentServiceRequestDTO(service,img,"ps12345",phoneNumber,note,1);
                 iRetrofit.insertStudent(insertStudentServiceRequestDTO).enqueue(insert);
             }
         });
@@ -116,8 +116,10 @@ public class FromCardStudentActivity extends AppCompatActivity {
                 Log.d(">>>>>>>>>>>>>`TAG", "onResponse: " + insertResponse.getStatus());
 
                 if(insertResponse.getStatus().equals("success")){
-                    startActivity(new Intent(FromCardStudentActivity.this, FromCardStudentActivity.class));
                     Toast.makeText(FromCardStudentActivity.this, "đăng kí thành công", Toast.LENGTH_SHORT).show();
+                    edt_sdt.setText("");
+                    edt_note.setText("");
+                    btn_img.setImageURI(null);
 
                 }else {
                     Toast.makeText(FromCardStudentActivity.this, "đăng kí thất bại", Toast.LENGTH_SHORT).show();

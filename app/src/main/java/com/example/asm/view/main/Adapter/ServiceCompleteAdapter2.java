@@ -38,20 +38,25 @@ public class ServiceCompleteAdapter2 extends RecyclerView.Adapter<ServiceComplet
 
         holder.id_txt.setText(String.valueOf(itemList.get(position).getId()));
         holder.loai_txt.setText(itemList.get(position).getService());
-        holder.confirm_txt.setText(itemList.get(position).getConfirm());
-        holder.date_txt.setText(itemList.get(position).getDate());
-        holder.thongbao_txt.setText(itemList.get(position).getThongbao());
+        holder.confirm_txt.setText(itemList.get(position).getQuantity());
+        holder.date_txt.setText(itemList.get(position).getPhoneNumber());
+        holder.thongbao_txt.setText(itemList.get(position).getMucdich());
+        holder.tv_confirm.setText(itemList.get(position).getConfirm());
+
 
         boolean isExpanded = itemList.get(position).isExpanded();
         holder.confirm_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.date_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        holder.thongbao_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.date_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        holder.tb_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.confirm_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-      //  holder.hd_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.linearLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-       // holder.btn_huy.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+        if(itemList.get(position).getService().equals("Giấy xác nhận sinh viên")){
+            holder.hd_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            holder.tv_confirm.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            holder.tb_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            holder.thongbao_txt.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        }
         if (isExpanded) {
             holder.img_arrow.setImageResource(R.drawable.ic_arrow_down);
         } else {
@@ -72,7 +77,7 @@ public class ServiceCompleteAdapter2 extends RecyclerView.Adapter<ServiceComplet
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView id_txt,loai_txt,date_txt,confirm_txt,thongbao_txt,btn_huy,date_dk,confirm_dk,tb_dk,hd_dk;
+        TextView id_txt,loai_txt,date_txt,confirm_txt,thongbao_txt,date_dk,confirm_dk,tb_dk,hd_dk,tv_confirm;
         ImageView img_arrow;
         LinearLayout linearLayout;
 
@@ -84,12 +89,12 @@ public class ServiceCompleteAdapter2 extends RecyclerView.Adapter<ServiceComplet
             date_txt = itemView.findViewById(R.id.date_txt);
             confirm_txt = itemView.findViewById(R.id.confirm_txt);
             thongbao_txt = itemView.findViewById(R.id.thongbao_txt);
-            btn_huy = itemView.findViewById(R.id.btn_huy);
             img_arrow = itemView.findViewById(R.id.img_arrow);
             date_dk = itemView.findViewById(R.id.date_dk);
             confirm_dk = itemView.findViewById(R.id.confirm_dk);
             tb_dk = itemView.findViewById(R.id.tb_dk);
             hd_dk = itemView.findViewById(R.id.hd_dk);
+            tv_confirm = itemView.findViewById(R.id.tv_confirm);
             linearLayout = itemView.findViewById(R.id.linearLayout);
         }
     }
