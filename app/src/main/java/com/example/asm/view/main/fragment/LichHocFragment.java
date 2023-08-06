@@ -1,6 +1,5 @@
 package com.example.asm.view.main.fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,17 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asm.R;
-import com.example.asm.view.main.adapter.CourceAdapter;
-import com.example.asm.view.main.adapter.DateAdapter;
+
+import com.example.asm.view.main.Adapter.CourceAdapter;
+import com.example.asm.view.main.Adapter.DateAdapter;
 import com.example.asm.view.main.dto.SchedulesResponeDTO;
 import com.example.asm.view.main.helpers.IRetrofitInterface;
 import com.example.asm.view.main.helpers.RetrofitHelper;
-import com.example.asm.view.main.model.Cource;
 import com.example.asm.view.main.model.DateModel;
 import com.example.asm.view.main.model.Schedules;
 import com.example.asm.view.main.recycleview.IRecycleview;

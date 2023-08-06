@@ -1,5 +1,6 @@
 package com.example.asm.view.main.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,13 @@ import com.example.asm.view.main.model.ServiceComplete;
 
 import java.util.List;
 
-public class ServiceCompleteAdapter extends RecyclerView.Adapter<ServiceCompleteAdapter.ViewHolder> {
+public class Servicee extends RecyclerView.Adapter<Servicee.ViewHolder> {
 
     private List<ServiceComplete> itemList;
-
-    public ServiceCompleteAdapter(List<ServiceComplete> itemList) {
+    private Context context;
+    public Servicee(Context context, List<ServiceComplete> itemList ) {
         this.itemList = itemList;
+        this.context = context;
     }
 
     @NonNull
@@ -49,9 +51,9 @@ public class ServiceCompleteAdapter extends RecyclerView.Adapter<ServiceComplete
         holder.date_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.tb_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.confirm_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-      //  holder.hd_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        //  holder.hd_dk.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.linearLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-       // holder.btn_huy.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        // holder.btn_huy.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         if (isExpanded) {
             holder.img_arrow.setImageResource(R.drawable.ic_arrow_down);
         } else {

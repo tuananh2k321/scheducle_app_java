@@ -1,4 +1,4 @@
-package com.example.asm.view.main.adapter;
+package com.example.asm.view.main.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
