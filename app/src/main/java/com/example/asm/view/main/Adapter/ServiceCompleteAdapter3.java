@@ -52,10 +52,6 @@ public class ServiceCompleteAdapter3 extends RecyclerView.Adapter<ServiceComplet
         holder.linearLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
 
-
-
-
-
         if (isExpanded) {
             holder.img_arrow.setImageResource(R.drawable.ic_arrow_down);
             if(itemList.get(position).getService().equals("Giấy xác nhận sinh viên")){
@@ -71,7 +67,7 @@ public class ServiceCompleteAdapter3 extends RecyclerView.Adapter<ServiceComplet
             }
         } else {
             holder.img_arrow.setImageResource(R.drawable.ic_arrow_right);
-           
+
         }
 
         holder.img_arrow.setOnClickListener(v -> {
