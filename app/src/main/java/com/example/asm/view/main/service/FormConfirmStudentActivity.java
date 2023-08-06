@@ -62,7 +62,7 @@ public class FormConfirmStudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String service = "Giấy xác nhận sinh viên";
-                String studentCode = "ps12345";
+                String studentCode = "ps24524";
                 String note = edt_note.getText().toString();
                 String phoneNumber = edt_sdt.getText().toString();
                 String mucdich = tv_mucdich.getText().toString();
